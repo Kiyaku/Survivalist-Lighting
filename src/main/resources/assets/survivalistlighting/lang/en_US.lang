@@ -1,0 +1,15 @@
+tile.survivalistlighting:torch_burnt.name=Burnt Torch
+tile.survivalistlighting:torch_lit.name=Lit Torch
+tile.survivalistlighting:torch_unlit.name=Unlit Torch
+
+tile.survivalistlighting:torch_coke_lit.name=Lit Coke Torch
+tile.survivalistlighting:torch_coke_unlit.name=Unlit Coke Torch
+
+tile.survivalistlighting:torch_stone_burnt.name=Burnt Stone Torch
+tile.survivalistlighting:torch_stone_lit.name=Lit Stone Torch
+tile.survivalistlighting:torch_stone_unlit.name=Unlit Stone Torch
+
+tile.survivalistlighting:torch_stone_coke_lit.name=Lit Stone Coke Torch
+tile.survivalistlighting:torch_stone_coke_unlit.name=Unlit Stone Coke Torch
+
+itemGroup.tabTorches=Survivalist Lighting

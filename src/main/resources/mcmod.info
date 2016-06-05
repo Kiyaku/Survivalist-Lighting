@@ -1,0 +1,17 @@
+[
+{
+  "modid": "survivalistlighting",
+  "name": "Survivalist Lighting",
+  "description": "Makes light more of a limited resource.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Wolfie_Waffle"],
+  "credits": "Choonster, for helping me a ton with code problems, and sky_01, for also helping me.",
+  "logoFile": "",
+  "screenshots": [],
+  "useDependencyInformation": true,
+  "dependencies": [ "Forge", "tconstruct" ]
+}
+]
