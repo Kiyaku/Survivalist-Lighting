@@ -12,11 +12,12 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = SurvivalistLighting.MODID, name = SurvivalistLighting.MODNAME, version = SurvivalistLighting.VERSION)
+@Mod(modid = SurvivalistLighting.MODID, name = SurvivalistLighting.MODNAME, version = SurvivalistLighting.VERSION, dependencies = SurvivalistLighting.DEPENDENCIES)
 public class SurvivalistLighting {
 	public static final String MODID = "survivalistlighting";
 	public static final String MODNAME = "Survivalist Lighting";
 	public static final String VERSION = "@VERSION@";
+	public static final String DEPENDENCIES = "required-after:tconstruct";
 
 	public static boolean isTconInstalled = false;
 

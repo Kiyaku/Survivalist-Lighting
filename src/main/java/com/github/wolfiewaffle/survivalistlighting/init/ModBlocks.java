@@ -9,9 +9,8 @@ import com.github.wolfiewaffle.survivalistlighting.blocks.BlockTorchBasicUnlit;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import slimeknights.mantle.client.CreativeTab;
 
 public final class ModBlocks {
 
@@ -40,7 +39,11 @@ public final class ModBlocks {
 	public static Block torch_stone_coke_lit;
 	public static Block torch_stone_coke_unlit;
 
-	public static final CreativeTabs tabTorches = new CreativeTab("tabTorches", new ItemStack(Blocks.TORCH));
+	public static final CreativeTabs tabTorches = new CreativeTabs("tabTorches") {
+	    @Override public Item getTabIconItem() {
+	        return Item.getItemFromBlock(Blocks.TORCH);
+	    }
+	};
 
 	public static void createBlocks() {
 

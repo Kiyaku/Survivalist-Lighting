@@ -53,12 +53,15 @@ dependencies {
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 
     // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+	//provided 'slimeknights.tconstruct:TConstruct-1.9.4-2.3.1.jenkins229,jar:1.9.4-2.3.1'
+	//provided 'slimeknights.mantle:Mantle-1.9.4-0.10.1.jenkins142.jar:1.9.4-0.10.1'
 
     // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
     // except that these dependencies get remapped to your current MCP mappings
     //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
     //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+	//deobfProvided 'slimeknights.tconstruct:TConstruct-1.9.4-2.3.1.jenkins229,jar:1.9.4-2.3.1'
+	//deobfProvided 'slimeknights.mantle:Mantle-1.9.4-0.10.1.jenkins142.jar:1.9.4-0.10.1'
 
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
