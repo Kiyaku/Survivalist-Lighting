@@ -24,9 +24,9 @@ public class TileEntityTorchUnlit extends TileEntity {
 
 	// Needed for NBT
 	@Override
-	public void writeToNBT(NBTTagCompound par1) {
-		super.writeToNBT(par1);
-		par1.setInteger("torchFuelNBT", getFuelAmount());
+	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+		compound.setInteger("torchFuelNBT", getFuelAmount());
+		return super.writeToNBT(compound);
 	}
 
 	// Needed for NBT
