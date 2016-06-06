@@ -26,11 +26,10 @@ public class TileEntityTorchLit extends TileEntity implements net.minecraft.util
 		this.fuel = f;
 	}
 
-	// Needed for NBT
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		compound.setInteger("torchFuelNBT", getFuelAmount());
-		return super.writeToNBT(compound);
+	public NBTTagCompound func_189515_b(NBTTagCompound p_189515_1_) {
+		p_189515_1_.setInteger("torchFuelNBT", getFuelAmount());
+		return super.func_189515_b(p_189515_1_);
 	}
 
 	// Needed for NBT
