@@ -16,10 +16,10 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Recipes {
 	public static void init() {
-		final ItemStack coal = new ItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE);
+		final ItemStack coal = new ItemStack(Items.COAL, 1, OreDictionary.WILDCARD_VALUE);
 
 		// Remove recipes
-		RecipeRemover.removeAnyRecipe(new ItemStack(Blocks.torch));
+		RecipeRemover.removeAnyRecipe(new ItemStack(Blocks.TORCH));
 		if (SurvivalistLighting.isTconInstalled) {
 			RecipeRemover.removeAnyRecipe(Item.getItemFromBlock(slimeknights.tconstruct.gadgets.TinkerGadgets.stoneTorch));
 		}

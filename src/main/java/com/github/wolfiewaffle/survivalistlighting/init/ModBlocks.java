@@ -40,7 +40,7 @@ public final class ModBlocks {
 	public static Block torch_stone_coke_lit;
 	public static Block torch_stone_coke_unlit;
 
-	public static final CreativeTabs tabTorches = new CreativeTab("tabTorches", new ItemStack(Blocks.torch));
+	public static final CreativeTabs tabTorches = new CreativeTab("tabTorches", new ItemStack(Blocks.TORCH));
 
 	public static void createBlocks() {
 
