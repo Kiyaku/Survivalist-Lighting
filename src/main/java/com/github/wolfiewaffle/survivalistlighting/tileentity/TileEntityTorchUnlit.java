@@ -22,6 +22,7 @@ public class TileEntityTorchUnlit extends TileEntity {
 		this.fuel = fuel;
 	}
 
+	// Needed for NBT
 	@Override
 	public NBTTagCompound func_189515_b(NBTTagCompound p_189515_1_) {
 		p_189515_1_.setInteger("torchFuelNBT", getFuelAmount());
