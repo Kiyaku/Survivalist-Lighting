@@ -38,8 +38,8 @@ public class ModConfig {
 
 		// Get config options
 		configDebug = config.getBoolean("debug output", Configuration.CATEGORY_GENERAL, false, "Output debug info. Not useful for players.");
-		configTorchFuel = config.getInt("regular torch fuel", Configuration.CATEGORY_GENERAL, 1000, 1, Integer.MAX_VALUE, "The max duration of a basic torch in seconds. Might not update already placed torches.");
-		configTorchCokeFuel = config.getInt("coke torch fuel", Configuration.CATEGORY_GENERAL, 2000, 1, Integer.MAX_VALUE, "The max duration of a coke torch in seconds. Might not update already placed torches. (Requires enable coke torches: true)");
+		configTorchFuel = config.getInt("regular torch fuel", Configuration.CATEGORY_GENERAL, 2000, 1, Integer.MAX_VALUE, "The max duration of a basic torch in seconds. Might not update already placed torches.");
+		configTorchCokeFuel = config.getInt("coke torch fuel", Configuration.CATEGORY_GENERAL, 4000, 1, Integer.MAX_VALUE, "The max duration of a coke torch in seconds. Might not update already placed torches. (Requires enable coke torches: true)");
 		configCokeTorches = config.getBoolean("enable coke torches", Configuration.CATEGORY_GENERAL, false, "Enable coke torches. Requires a mod that adds oreDictionary coal coke.");
 		configStoneTorches = config.getBoolean("enable stone torches", Configuration.CATEGORY_GENERAL, true, "Enable stone torches. Requires Tinker's Construct.");
 		configLightItems = config.getStringList("consumed lighter items", Configuration.CATEGORY_GENERAL, new String[] {"minecraft:flint", "minecraft:flint_and_steel", "minecraft:fire_charge"}, "A list of items that can be used to light a torch. If the item is not damageable, it will be consumed.");
