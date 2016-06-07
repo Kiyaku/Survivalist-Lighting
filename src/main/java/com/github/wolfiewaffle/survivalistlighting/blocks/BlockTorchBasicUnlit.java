@@ -167,7 +167,8 @@ public class BlockTorchBasicUnlit extends BlockTorch implements ITileEntityProvi
 		int oldFuel = ((TileEntityTorchUnlit) worldIn.getTileEntity(pos)).getFuelAmount();
 
 		// Set block
-		worldIn.setBlockState(pos, getLitVariant().getDefaultState());
+		IBlockState newState = this.getLitVariant().getDefaultState().withProperty(FACING, enumfacing);
+		worldIn.setBlockState(pos, newState);
 
 		// Particle effects
 		double d0 = (double) pos.getX() + 0.5D;

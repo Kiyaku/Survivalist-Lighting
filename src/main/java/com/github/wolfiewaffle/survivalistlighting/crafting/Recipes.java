@@ -19,7 +19,8 @@ public class Recipes {
 		final ItemStack coal = new ItemStack(Items.COAL, 1, OreDictionary.WILDCARD_VALUE);
 
 		// Remove recipes
-		RecipeRemover.removeAnyRecipe(new ItemStack(Blocks.TORCH));
+		RecipeRemover.removeAnyRecipe(Item.getItemFromBlock((Blocks.TORCH)));
+
 		if (SurvivalistLighting.isTconInstalled) {
 			RecipeRemover.removeAnyRecipe(Item.getItemFromBlock(slimeknights.tconstruct.gadgets.TinkerGadgets.stoneTorch));
 		}
