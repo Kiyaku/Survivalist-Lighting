@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = SurvivalistLighting.MODID, name = SurvivalistLighting.MODNAME, version = SurvivalistLighting.VERSION, dependencies = SurvivalistLighting.DEPENDENCIES)
 public class SurvivalistLighting {
+	// This is the 1.9.4 branch
 	public static final String MODID = "survivalistlighting";
 	public static final String MODNAME = "Survivalist Lighting";
 	public static final String VERSION = "@VERSION@";
