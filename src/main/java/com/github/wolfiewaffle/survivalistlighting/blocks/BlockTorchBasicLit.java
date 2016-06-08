@@ -118,7 +118,8 @@ public class BlockTorchBasicLit extends BlockTorch implements ITileEntityProvide
 	// Make sure the new TE has the right fuel based of item meta
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-  
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+
 		// Get TileEntity to change and meta from item
 		TileEntityTorchLit te = worldIn.getTileEntity(pos) instanceof TileEntityTorchLit ? (TileEntityTorchLit) worldIn.getTileEntity(pos) : null;
     	int itemMeta = stack.getItemDamage();

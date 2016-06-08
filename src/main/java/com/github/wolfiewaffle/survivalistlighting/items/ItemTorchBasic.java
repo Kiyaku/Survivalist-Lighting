@@ -48,8 +48,8 @@ public class ItemTorchBasic extends ItemBlock {
 	}
 
 	@Override
-	public EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
-			EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 
 		ResourceLocation rl = worldIn.getBlockState(pos).getBlock().getRegistryName();
 
@@ -58,44 +58,50 @@ public class ItemTorchBasic extends ItemBlock {
 
 			// If the activated block is a lighter block
 			if (ModConfig.inWorldLightItems.contains(rl)) {
-
-				lightTorch(playerIn, hand);
+				lightTorch(worldIn, playerIn, hand);
 				// Needs to be SUCCESS for some reason
 				return EnumActionResult.SUCCESS;
+
+			} else {
+				return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 			}
 		}
 
-		return super.onItemUseFirst(stack, playerIn, worldIn, pos, side, hitX, hitY, hitZ, hand);
+		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
-	public void lightTorch(EntityPlayer playerIn, EnumHand hand) {
-		int oldFuel = playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem).getItemDamage();
+	public void lightTorch(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+
 		Item heldTorch = playerIn.inventory.getCurrentItem().getItem();
+
+		int oldFuel = playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem).getItemDamage();
 		int count = 0;
+		int slot = playerIn.inventory.currentItem;
 
 		Item torch1;
 		Item torch2;
 
 		// Decide what torch to use
 		if (((ItemTorchBasic) heldTorch).getLitVariant() != null) {
-			System.out.println(((ItemTorchBasic) heldTorch).getLitVariant());
+
 			torch1 = ((ItemTorchBasic) heldTorch).getLitVariant();
 			torch2 = heldTorch;
-	
+
 			// Get the amount of held items
 			if(playerIn.getHeldItem(hand) != null) {
 				count = playerIn.getHeldItem(hand).stackSize;
 			}
-	
+
 			// If there is only one torch, just light it
 			if (count == 1) {
-				playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(torch1, count, oldFuel));
+				playerIn.inventory.setInventorySlotContents(slot, new ItemStack(torch1, count, oldFuel));
+
 			} else if (count > 1) {
-				// Subtract one torch from the stack and give a lit torch to the player
-				playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(torch2, count-1, oldFuel));
-	
-				if (playerIn.inventory.addItemStackToInventory(new ItemStack(torch1, 1, oldFuel)) == true) {
-				} else {
+				// Subtract one torch from the stack
+				playerIn.inventory.setInventorySlotContents(slot, new ItemStack(torch2, count-1, oldFuel));
+
+				// Give a lit torch to the player
+				if (!playerIn.inventory.addItemStackToInventory(new ItemStack(torch1, 1, oldFuel))) {
 					playerIn.dropItem(torch1, 1);
 				}
 			}

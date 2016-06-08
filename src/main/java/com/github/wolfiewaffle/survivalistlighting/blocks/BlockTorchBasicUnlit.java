@@ -14,6 +14,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -113,7 +114,11 @@ public class BlockTorchBasicUnlit extends BlockTorch implements ITileEntityProvi
 						if (itemStack.isItemStackDamageable()) {
 							itemStack.attemptDamageItem(1, RANDOM);
 						} else {
-							playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(itemStack.getItem(), itemStack.stackSize-1, itemStack.getMetadata()));
+							// If there is only one item, set the stack to air
+							if (itemStack.stackSize == 1)
+								playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(Blocks.AIR));
+							else
+								playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(itemStack.getItem(), itemStack.stackSize-1, itemStack.getMetadata()));
 						}
 
 						lightTorch(worldIn, pos, state.getValue(FACING));
@@ -137,7 +142,8 @@ public class BlockTorchBasicUnlit extends BlockTorch implements ITileEntityProvi
 	// Make sure the new TE has the right fuel based of item meta
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-  
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+
 		// Get TileEntity to change and meta from item
 		TileEntityTorchUnlit te = worldIn.getTileEntity(pos) instanceof TileEntityTorchUnlit ? (TileEntityTorchUnlit) worldIn.getTileEntity(pos) : null;
     	int itemMeta = stack.getItemDamage();
