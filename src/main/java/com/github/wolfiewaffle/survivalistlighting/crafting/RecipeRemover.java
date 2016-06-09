@@ -25,7 +25,7 @@ public class RecipeRemover {
 		for (ItemStack stack : removelist)
 			removeShapedRecipe(stack);
 	}
-	
+
 	public static void removeAnyRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {
@@ -36,7 +36,7 @@ public class RecipeRemover {
 			}
 		}
 	}
-	
+
 	public static void removeAnyRecipe(Item resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {
@@ -47,7 +47,7 @@ public class RecipeRemover {
 			}
 		}
 	}
-	
+
 	public static void removeShapedRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {
@@ -62,7 +62,7 @@ public class RecipeRemover {
 			}
 		}
 	}
-	
+
 	public static void removeShapelessRecipe(ItemStack resultItem) {
 		List<IRecipe> recipes = CraftingManager.getInstance().getRecipeList();
 		for (int i = 0; i < recipes.size(); i++) {

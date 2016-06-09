@@ -20,6 +20,8 @@ public final class ModBlocks {
 	private static boolean REG_COKE = ModConfig.configCokeTorches;
 	private static boolean REG_STONE = ModConfig.configStoneTorches && SurvivalistLighting.isTconInstalled;
 	private static boolean REG_STONE_COKE = REG_STONE && REG_COKE;
+	private static boolean REG_BONE = ModConfig.configStoneTorches && SurvivalistLighting.isTconInstalled;
+	private static boolean REG_BONE_COKE = REG_STONE && REG_COKE;
 
 	// Torches
 	public static Block torch_burnt;
@@ -39,6 +41,15 @@ public final class ModBlocks {
 	public static Block torch_stone_coke_lit;
 	public static Block torch_stone_coke_unlit;
 
+	// Bone torches
+	public static Block torch_bone_burnt;
+	public static Block torch_bone_lit;
+	public static Block torch_bone_unlit;
+
+	// Bone coke torches
+	public static Block torch_bone_coke_lit;
+	public static Block torch_bone_coke_unlit;
+
 	public static final CreativeTabs tabTorches = new CreativeTabs("tabTorches") {
 	    @Override public Item getTabIconItem() {
 	        return Item.getItemFromBlock(Blocks.TORCH);
@@ -46,10 +57,6 @@ public final class ModBlocks {
 	};
 
 	public static void createBlocks() {
-
-		System.out.println();
-		if (ModConfig.configDebug) System.out.printf("SURVIVALIST_LIGHTING: REG_STONE: " + REG_STONE);
-		System.out.println();
 
 		// Torches
 		GameRegistry.register(torch_burnt = new BlockTorchBasicBurnt("torch_burnt", true));
@@ -68,5 +75,14 @@ public final class ModBlocks {
 		// Stone coke torches
 		GameRegistry.register(torch_stone_coke_lit = new BlockTorchBasicLit("torch_stone_coke_lit", fuelCoke, torch_stone_burnt, torch_stone_coke_unlit, REG_STONE_COKE));
 		GameRegistry.register(torch_stone_coke_unlit = new BlockTorchBasicUnlit("torch_stone_coke_unlit", fuelCoke, torch_stone_coke_lit, REG_STONE_COKE));
+
+		// Bone torches
+		GameRegistry.register(torch_bone_burnt = new BlockTorchBasicBurnt("torch_bone_burnt", REG_BONE));
+		GameRegistry.register(torch_bone_lit = new BlockTorchBasicLit("torch_bone_lit", fuelReg, torch_bone_burnt, torch_bone_unlit, REG_BONE));
+		GameRegistry.register(torch_bone_unlit = new BlockTorchBasicUnlit("torch_bone_unlit", fuelReg, torch_bone_lit, REG_BONE));
+
+		// Bone coke torches
+		GameRegistry.register(torch_bone_coke_lit = new BlockTorchBasicLit("torch_bone_coke_lit", fuelCoke, torch_bone_burnt, torch_bone_coke_unlit, REG_BONE_COKE));
+		GameRegistry.register(torch_bone_coke_unlit = new BlockTorchBasicUnlit("torch_bone_coke_unlit", fuelCoke, torch_bone_coke_lit, REG_BONE_COKE));
 	}
 }

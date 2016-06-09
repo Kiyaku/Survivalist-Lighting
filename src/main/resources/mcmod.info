@@ -12,7 +12,7 @@
   "logoFile": "",
   "screenshots": [],
   "requiredMods": [ "Forge" ],
-  "dependencies": [ "tconstruct" ],
+  "dependencies": [ "tconstruct", "bonetorch" ],
   "useDependencyInformation": true
 }
 ]

@@ -28,6 +28,15 @@ public class ItemRenderRegister {
 		// Stone coke torches
 		reg(ModItems.torch_stone_coke_lit, "torch_stone_coke_lit");
 		reg(ModItems.torch_stone_coke_unlit, "torch_stone_coke_unlit");
+
+		// Bone torches
+		reg(ModItems.torch_bone_burnt, "torch_bone_burnt");
+		reg(ModItems.torch_bone_lit, "torch_bone_lit");
+		reg(ModItems.torch_bone_unlit, "torch_bone_unlit");
+
+		// Bone coke torches
+		reg(ModItems.torch_bone_coke_lit, "torch_bone_coke_lit");
+		reg(ModItems.torch_bone_coke_unlit, "torch_bone_coke_unlit");
 	}
 
 	public static void reg(Item item, String name) {

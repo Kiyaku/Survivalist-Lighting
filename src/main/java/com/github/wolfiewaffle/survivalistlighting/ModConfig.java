@@ -15,6 +15,7 @@ public class ModConfig {
 	public static int configTorchFuel;
 	public static boolean configCokeTorches;
 	public static boolean configStoneTorches;
+	public static boolean configBoneTorches;
 	public static int configTorchCokeFuel;
 	public static String[] configLightItems;
 	public static String[] configFreeLightItems;
@@ -42,9 +43,10 @@ public class ModConfig {
 		configTorchCokeFuel = config.getInt("coke torch fuel", Configuration.CATEGORY_GENERAL, 4000, 1, Integer.MAX_VALUE, "The max duration of a coke torch in seconds. Might not update already placed torches. (Requires enable coke torches: true)");
 		configCokeTorches = config.getBoolean("enable coke torches", Configuration.CATEGORY_GENERAL, false, "Enable coke torches. Requires a mod that adds oreDictionary coal coke.");
 		configStoneTorches = config.getBoolean("enable stone torches", Configuration.CATEGORY_GENERAL, true, "Enable stone torches. Requires Tinker's Construct.");
+		configBoneTorches = config.getBoolean("enable bone torches", Configuration.CATEGORY_GENERAL, true, "Enable bone torches. Compatible with SBM Bone Torch Mod.");
 		configLightItems = config.getStringList("consumed lighter items", Configuration.CATEGORY_GENERAL, new String[] {"minecraft:flint", "minecraft:flint_and_steel", "minecraft:fire_charge"}, "A list of items that can be used to light a torch. If the item is not damageable, it will be consumed.");
-		configFreeLightItems = config.getStringList("free lighter items", Configuration.CATEGORY_GENERAL, new String[] {"minecraft:torch", "minecraft:lava_bucket", "survivalistlighting:torch_lit", "survivalistlighting:torch_coke_lit", "survivalistlighting:torch_stone_lit", "survivalistlighting:torch_stone_coke_lit"}, "A list of items that can be used to light a torch. These will not be damaged or consumed.");
-		configInWorldLightItems = config.getStringList("in world lighter items", Configuration.CATEGORY_GENERAL, new String[] {"minecraft:torch", "survivalistlighting:torch_lit", "survivalistlighting:torch_coke_lit", "survivalistlighting:torch_stone_lit", "survivalistlighting:torch_stone_coke_lit"}, "A list of blocks that can be used to light a torch by right clicking them.");
+		configFreeLightItems = config.getStringList("free lighter items", Configuration.CATEGORY_GENERAL, new String[] {"minecraft:torch", "minecraft:lava_bucket", "survivalistlighting:torch_lit", "survivalistlighting:torch_coke_lit", "survivalistlighting:torch_stone_lit", "survivalistlighting:torch_stone_coke_lit", "tconstruct:stone_torch", "survivalistlighting:torch_bone_lit", "survivalistlighting:torch_bone_coke_lit", "bonetorch:boneTorch"}, "A list of items that can be used to light a torch. These will not be damaged or consumed.");
+		configInWorldLightItems = config.getStringList("in world lighter items", Configuration.CATEGORY_GENERAL, new String[] {"minecraft:torch", "survivalistlighting:torch_lit", "survivalistlighting:torch_coke_lit", "survivalistlighting:torch_stone_lit", "survivalistlighting:torch_stone_coke_lit", "tconstruct:stone_torch", "survivalistlighting:torch_bone_lit", "survivalistlighting:torch_bone_coke_lit", "bonetorch:boneTorch"}, "A list of blocks that can be used to light a torch by right clicking them.");
 		configTorchDropMode = config.getInt("torch drop mode", Configuration.CATEGORY_GENERAL, 0, 0, 2, "0: Torches drop as lit torches when broken\n1: Torches drop as unlit torches when broken\n2: Torches burn out completely when broken");
 		configLightInInventory = config.getBoolean("light torches in inventory", Configuration.CATEGORY_GENERAL, true, "Allow lighting torches in the crafting grid.");
 

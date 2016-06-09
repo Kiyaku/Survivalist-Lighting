@@ -28,6 +28,15 @@ public final class ModItems {
 	public static ItemTorchBasic torch_stone_coke_lit = new ItemTorchBasic(ModBlocks.torch_stone_coke_lit, "torch_stone_coke_lit", FUEL_COKE, 1, null);
 	public static ItemTorchBasic torch_stone_coke_unlit = new ItemTorchBasic(ModBlocks.torch_stone_coke_unlit, "torch_stone_coke_unlit", FUEL_COKE, ModItems.torch_stone_coke_lit);
 
+	// Bone torches
+	public static ItemTorchBasic torch_bone_burnt = new ItemTorchBasic(ModBlocks.torch_bone_burnt, "torch_bone_burnt", FUEL_REGULAR, null);
+	public static ItemTorchBasic torch_bone_lit = new ItemTorchBasic(ModBlocks.torch_bone_lit, "torch_bone_lit", FUEL_REGULAR, 1, null);
+	public static ItemTorchBasic torch_bone_unlit = new ItemTorchBasic(ModBlocks.torch_bone_unlit, "torch_bone_unlit", FUEL_REGULAR, ModItems.torch_bone_lit);
+
+	// Bone coke torches
+	public static ItemTorchBasic torch_bone_coke_lit = new ItemTorchBasic(ModBlocks.torch_bone_coke_lit, "torch_bone_coke_lit", FUEL_COKE, 1, null);
+	public static ItemTorchBasic torch_bone_coke_unlit = new ItemTorchBasic(ModBlocks.torch_bone_coke_unlit, "torch_bone_coke_unlit", FUEL_COKE, ModItems.torch_bone_coke_lit);
+
 	public static void createItems() {
 		// Torches
 		GameRegistry.register(torch_burnt);
@@ -46,5 +55,14 @@ public final class ModItems {
 		// Stone coke torches
 		GameRegistry.register(torch_stone_coke_lit);
 		GameRegistry.register(torch_stone_coke_unlit);
+
+		// Bone torches
+		GameRegistry.register(torch_bone_burnt);
+		GameRegistry.register(torch_bone_lit);
+		GameRegistry.register(torch_bone_unlit);
+
+		// Bone coke torches
+		GameRegistry.register(torch_bone_coke_lit);
+		GameRegistry.register(torch_bone_coke_unlit);
 	}
 }

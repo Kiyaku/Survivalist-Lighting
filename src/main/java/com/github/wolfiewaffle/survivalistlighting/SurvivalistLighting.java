@@ -18,10 +18,13 @@ public class SurvivalistLighting {
 	public static final String MODID = "survivalistlighting";
 	public static final String MODNAME = "Survivalist Lighting";
 	public static final String VERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "required-after:tconstruct";
+	public static final String DEPENDENCIES = "required-after:tconstruct;required-after:bonetorch";
 
+	// Mod compat
 	public static boolean isTconInstalled = false;
+	public static boolean isBonetorchInstalled = false;
 
+	// Proxy
 	@SidedProxy(clientSide = "com.github.wolfiewaffle.survivalistlighting.proxy.ClientProxy", serverSide = "com.github.wolfiewaffle.survivalistlighting.proxy.ServerProxy")
 	public static CommonProxy proxy;
 
@@ -32,7 +35,7 @@ public class SurvivalistLighting {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		isTconInstalled = Loader.isModLoaded("tconstruct");
-		if (ModConfig.configDebug) System.out.printf("SURVIVALIST_LIGHTING: Is Tcon installed? %b\n", isTconInstalled);
+		isBonetorchInstalled = Loader.isModLoaded("bonetorch");
 
 		SurvivalistLighting.proxy.preInit(event);
 	}

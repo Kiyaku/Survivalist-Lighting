@@ -12,4 +12,11 @@ tile.survivalistlighting:torch_stone_unlit.name=Unlit Stone Torch
 tile.survivalistlighting:torch_stone_coke_lit.name=Lit Stone Coke Torch
 tile.survivalistlighting:torch_stone_coke_unlit.name=Unlit Stone Coke Torch
 
+tile.survivalistlighting:torch_bone_burnt.name=Burnt Bone Torch
+tile.survivalistlighting:torch_bone_lit.name=Lit Bone Torch
+tile.survivalistlighting:torch_bone_unlit.name=Unlit Bone Torch
+
+tile.survivalistlighting:torch_bone_coke_lit.name=Lit Bone Coke Torch
+tile.survivalistlighting:torch_bone_coke_unlit.name=Unlit Bone Coke Torch
+
 itemGroup.tabTorches=Survivalist Lighting
