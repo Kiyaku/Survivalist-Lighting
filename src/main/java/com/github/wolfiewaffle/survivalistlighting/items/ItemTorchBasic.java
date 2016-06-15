@@ -4,14 +4,15 @@ import com.github.wolfiewaffle.survivalistlighting.ModConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 
 public class ItemTorchBasic extends ItemBlock {
@@ -48,29 +49,29 @@ public class ItemTorchBasic extends ItemBlock {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn,
+			EnumHand hand) {
 
-		ResourceLocation rl = worldIn.getBlockState(pos).getBlock().getRegistryName();
-
-		// If sneaking, just place the block normally
-		if (!playerIn.isSneaking()) {
+		RayTraceResult rayTrace = itemStackIn.getItem().rayTrace(worldIn, playerIn, true);
+		System.out.println(rayTrace.typeOfHit);
+		if (rayTrace.typeOfHit == Type.BLOCK) {
+			ResourceLocation rl = worldIn.getBlockState(rayTrace.getBlockPos()).getBlock().getRegistryName();
 
 			// If the activated block is a lighter block
 			if (ModConfig.inWorldLightItems.contains(rl)) {
-				lightTorch(worldIn, playerIn, hand);
-				// Needs to be SUCCESS for some reason
-				return EnumActionResult.SUCCESS;
 
-			} else {
-				return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+				// If sneaking, just place the block normally
+				if (!playerIn.isSneaking()) {
+					lightTorch(playerIn, hand);
+				}
 			}
 		}
 
-		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 
-	public void lightTorch(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	/** Lights a torch in the inventory */
+	public void lightTorch(EntityPlayer playerIn, EnumHand hand) {
 
 		Item heldTorch = playerIn.inventory.getCurrentItem().getItem();
 
