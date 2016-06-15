@@ -64,7 +64,7 @@ public class RecipesIgniting {
 				}
 	
 				// Bone torches
-				if (ModConfig.configBoneTorches) {
+				if (ModConfig.configBoneTorches && SurvivalistLighting.isBonetorchInstalled) {
 					GameRegistry.addRecipe(new ShapelessReuseRecipe(unlitTorches, 
 							new ItemStack(ModItems.torch_bone_lit), 
 							new ItemStack(ModItems.torch_bone_unlit, 1, wc), 
@@ -122,7 +122,7 @@ public class RecipesIgniting {
 					}
 	
 					// Bone torches
-					if (ModConfig.configBoneTorches) {
+					if (ModConfig.configBoneTorches && SurvivalistLighting.isBonetorchInstalled) {
 						GameRegistry.addRecipe(new ShapelessDamageRecipe(unlitTorches, 
 								new ItemStack(ModItems.torch_bone_lit), 
 								new ItemStack(ModItems.torch_bone_unlit, 1, wc), 
@@ -173,7 +173,7 @@ public class RecipesIgniting {
 					}
 	
 					// Bone torches
-					if (ModConfig.configBoneTorches) {
+					if (ModConfig.configBoneTorches && SurvivalistLighting.isBonetorchInstalled) {
 						GameRegistry.addRecipe(new ShapelessOreRecipe(
 								new ItemStack(ModItems.torch_bone_lit), 
 								new ItemStack(ModItems.torch_bone_unlit, 1, wc), 
@@ -181,7 +181,7 @@ public class RecipesIgniting {
 							));
 	
 						// Bone coke torches
-						if (ModConfig.configBoneTorches) GameRegistry.addRecipe(new ShapelessOreRecipe(
+						if (ModConfig.configBoneTorches && SurvivalistLighting.isBonetorchInstalled) GameRegistry.addRecipe(new ShapelessOreRecipe(
 								new ItemStack(ModItems.torch_bone_coke_lit), 
 								new ItemStack(ModItems.torch_bone_coke_unlit, 1, wc), 
 								itemStack

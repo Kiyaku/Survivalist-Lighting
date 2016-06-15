@@ -38,6 +38,7 @@ public final class ModItems {
 	public static ItemTorchBasic torch_bone_coke_unlit = new ItemTorchBasic(ModBlocks.torch_bone_coke_unlit, "torch_bone_coke_unlit", FUEL_COKE, ModItems.torch_bone_coke_lit);
 
 	public static void createItems() {
+
 		// Torches
 		GameRegistry.register(torch_burnt);
 		GameRegistry.register(torch_lit);

@@ -57,7 +57,7 @@ public class RecipesUnlitTorches {
 		}
 
 		// Bone torches
-		if (ModConfig.configBoneTorches) {
+		if (ModConfig.configBoneTorches && SurvivalistLighting.isBonetorchInstalled) {
 
 			GameRegistry.addRecipe(new ShapedOreRecipe(
 					new ItemStack(Item.getItemFromBlock(ModBlocks.torch_bone_unlit)), 

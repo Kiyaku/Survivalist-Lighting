@@ -35,12 +35,15 @@ public class Recipes {
 	private final static ItemStack coal = new ItemStack(Items.COAL, 1, OreDictionary.WILDCARD_VALUE);
 	private final static ItemStack glowstone = new ItemStack(Items.GLOWSTONE_DUST);
 	private final static ItemStack bone = new ItemStack(Items.BONE);
-	private final static Item torchBone = Item.getItemFromBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("bonetorch:boneTorch")));
-	private final static Item torchStone = Item.getItemFromBlock(slimeknights.tconstruct.gadgets.TinkerGadgets.stoneTorch);
+	private static Item torchBone = null;
+	private static Item torchStone = null;
 	private final static Item torch = Item.getItemFromBlock(Blocks.TORCH);
 	private final static int wc = OreDictionary.WILDCARD_VALUE;
 
 	public static void init() {
+
+		if (SurvivalistLighting.isBonetorchInstalled) torchBone = Item.getItemFromBlock(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("bonetorch:boneTorch")));
+		if (SurvivalistLighting.isTconInstalled) torchStone = Item.getItemFromBlock(slimeknights.tconstruct.gadgets.TinkerGadgets.stoneTorch);
 
 		RecipesIgniting.init();
 		RecipesUnlitTorches.init();
@@ -75,7 +78,7 @@ public class Recipes {
 				));
 		}
 
-		if (ModConfig.configBoneTorches) {
+		if (ModConfig.configBoneTorches && SurvivalistLighting.isBonetorchInstalled) {
 			GameRegistry.addRecipe(new ShapedOreRecipe(
 					new ItemStack(torchBone), 
 					"AAA", " B ", " C ",
@@ -107,7 +110,7 @@ public class Recipes {
 				));
 		}
 
-		if (ModConfig.configBoneTorches)
+		if (ModConfig.configBoneTorches && SurvivalistLighting.isBonetorchInstalled)
 		for (Item item : toBoneTorch) {
 		 	GameRegistry.addRecipe(new ShapelessOreRecipe(
 					new ItemStack(torchBone), 
