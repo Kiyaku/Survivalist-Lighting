@@ -4,15 +4,15 @@ import com.github.wolfiewaffle.survivalistlighting.ModConfig;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemTorchBasic extends ItemBlock {
@@ -49,13 +49,10 @@ public class ItemTorchBasic extends ItemBlock {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn,
-			EnumHand hand) {
+	public EnumActionResult onItemUse(ItemStack itemStackIn, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		System.out.println("Called onItemUse()");
 
-		RayTraceResult rayTrace = itemStackIn.getItem().rayTrace(worldIn, playerIn, true);
-		System.out.println(rayTrace.typeOfHit);
-		if (rayTrace.typeOfHit == Type.BLOCK) {
-			ResourceLocation rl = worldIn.getBlockState(rayTrace.getBlockPos()).getBlock().getRegistryName();
+		ResourceLocation rl = worldIn.getBlockState(pos).getBlock().getRegistryName();
 
 			// If the activated block is a lighter block
 			if (ModConfig.inWorldLightItems.contains(rl)) {
@@ -63,50 +60,60 @@ public class ItemTorchBasic extends ItemBlock {
 				// If sneaking, just place the block normally
 				if (!playerIn.isSneaking()) {
 					lightTorch(playerIn, hand);
+
+					return EnumActionResult.SUCCESS;
 				}
 			}
-		}
 
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return super.onItemUse(itemStackIn, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
 	}
 
 	/** Lights a torch in the inventory */
-	public void lightTorch(EntityPlayer playerIn, EnumHand hand) {
+	public ItemStack lightTorch(EntityPlayer playerIn, EnumHand hand) {
+		if (playerIn.getHeldItem(hand) != null) {
 
-		Item heldTorch = playerIn.inventory.getCurrentItem().getItem();
+			ItemStack heldTorch = playerIn.getHeldItem(hand);
 
-		int oldFuel = playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem).getItemDamage();
-		int count = 0;
-		int slot = playerIn.inventory.currentItem;
+			int oldFuel = heldTorch.getItemDamage();
+			int count = 0;
 
-		Item torch1;
-		Item torch2;
+			Item torch;
+			Item oldTorch;
 
-		// Decide what torch to use
-		if (((ItemTorchBasic) heldTorch).getLitVariant() != null) {
+			// Decide what torch to use
+			if (((ItemTorchBasic) heldTorch.getItem()).getLitVariant() != null) {
 
-			torch1 = ((ItemTorchBasic) heldTorch).getLitVariant();
-			torch2 = heldTorch;
+				torch = ((ItemTorchBasic) heldTorch.getItem()).getLitVariant();
+				oldTorch = heldTorch.getItem();
 
-			// Get the amount of held items
-			if(playerIn.getHeldItem(hand) != null) {
+				// Get the amount of held items
 				count = playerIn.getHeldItem(hand).stackSize;
-			}
 
-			// If there is only one torch, just light it
-			if (count == 1) {
-				playerIn.inventory.setInventorySlotContents(slot, new ItemStack(torch1, count, oldFuel));
+				// If there is only one torch, just light it
+				if (count == 1) {
+					playerIn.setHeldItem(hand, new ItemStack(torch, count, oldFuel));
 
-			} else if (count > 1) {
-				// Subtract one torch from the stack
-				playerIn.inventory.setInventorySlotContents(slot, new ItemStack(torch2, count-1, oldFuel));
+					return new ItemStack(torch, count, oldFuel);
+				} else if (count > 1) {
+					// Subtract one torch from the stack
+					playerIn.setHeldItem(hand, new ItemStack(oldTorch, count-1, oldFuel));
 
-				// Give a lit torch to the player
-				if (!playerIn.inventory.addItemStackToInventory(new ItemStack(torch1, 1, oldFuel))) {
-					playerIn.dropItem(torch1, 1);
+					// Give a lit torch to the player
+					if (!playerIn.inventory.addItemStackToInventory(new ItemStack(torch, 1, oldFuel))) {
+						playerIn.dropItem(torch, 1);
+					}
+
+					return new ItemStack(torch, count, oldFuel);
 				}
 			}
 		}
+
+		return null;
 	}
 
 	public Item getLitVariant() {
