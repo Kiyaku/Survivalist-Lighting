@@ -31,7 +31,7 @@ public class BlockTorchBasicLit extends BlockTorch implements ITileEntityProvide
 		this.setUnlocalizedName(this.getRegistryName().toString());
 		this.setHardness(0.0f);
 		this.setResistance(0.0f);
-		this.setLightLevel(1.0f);
+		this.setLightLevel(0.93F);
 		this.isBlockContainer = true;
 
 		this.maxFuel = maxFuel;
@@ -42,29 +42,29 @@ public class BlockTorchBasicLit extends BlockTorch implements ITileEntityProvide
 		else this.setCreativeTab(null);
 	}
 
-	// Gets the TileEntity of a block
+	/** Gets the TileEntity of a block */
 	public TileEntityTorchLit getTileEntity(IBlockAccess worldIn, BlockPos pos) {
 		return worldIn.getTileEntity(pos) 
-				instanceof TileEntityTorchLit ? (TileEntityTorchLit) worldIn.getTileEntity(pos) : null;
+			instanceof TileEntityTorchLit ? (TileEntityTorchLit) worldIn.getTileEntity(pos) : null;
 	}
 
-	// Create tile entity
+	/** Create tile entity */
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileEntityTorchLit();
 	}
 
-    // Gets the burnt version of the torch
+    /** Gets the burnt version of the torch */
 	public Block getBurntVariant() {
 		return burntVariant;
 	}
 
-    // Gets the unlit version of the torch
+    /** Gets the unlit version of the torch */
 	public Block getUnlitVariant() {
 		return unlitVariant;
 	}
 
-	// Gets block drops in some special way so that it returns the right thing
+	// Make sure block drops are correct
 	@Override
 	public java.util.List<ItemStack> getDrops(IBlockAccess worldIn, BlockPos pos, IBlockState state, int fortune) {
 
@@ -82,7 +82,7 @@ public class BlockTorchBasicLit extends BlockTorch implements ITileEntityProvide
 				// Get correct item meta
 				// Item damage goes from 0 to 1000, TE fuel value goes from 1000 to 0
 				// itemDamage + fuel = MAX_FUEL
-				int itemMeta = maxFuel - te.getFuelAmount();
+				int itemMeta = maxFuel - te.getFuel();
 
         		// 0 - Drop as lit torch, 1 - drop as unlit torch
         		if (ModConfig.configTorchDropMode == 0) {
@@ -101,15 +101,16 @@ public class BlockTorchBasicLit extends BlockTorch implements ITileEntityProvide
         return drop;
     }
 
-	// On block right click
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 
-		TileEntityTorchLit te = (TileEntityTorchLit) worldIn.getTileEntity(pos);
-
-		if (te != null) {
-			if (ModConfig.configDebug && !worldIn.isRemote) System.out.printf("Right click. Fuel: %d\n", te.getFuelAmount());
+		if (ModConfig.configDebug) {
+			TileEntityTorchLit te = (TileEntityTorchLit) worldIn.getTileEntity(pos);
+	
+			if (te != null) {
+				 if (!worldIn.isRemote) System.out.printf("Right click. Fuel: %d\n", te.getFuel());
+			}
 		}
 
 		return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
@@ -136,7 +137,7 @@ public class BlockTorchBasicLit extends BlockTorch implements ITileEntityProvide
         return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 
-    // Makes sure the block is actually deleted
+    // Makes sure the block is deleted correctly
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, te, stack);

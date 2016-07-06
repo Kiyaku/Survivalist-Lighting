@@ -14,7 +14,7 @@ public class TileEntityTorchLit extends TileEntity implements net.minecraft.util
 	/**
 	 * @return The current fuel value of the TileEntity
 	 */
-	public int getFuelAmount() {
+	public int getFuel() {
 		return this.fuel;
 	}
 
@@ -29,7 +29,7 @@ public class TileEntityTorchLit extends TileEntity implements net.minecraft.util
 	// Needed for NBT
 	@Override
 	public NBTTagCompound func_189515_b(NBTTagCompound p_189515_1_) {
-		p_189515_1_.setInteger("torchFuelNBT", getFuelAmount());
+		p_189515_1_.setInteger("torchFuelNBT", getFuel());
 		return super.func_189515_b(p_189515_1_);
 	}
 

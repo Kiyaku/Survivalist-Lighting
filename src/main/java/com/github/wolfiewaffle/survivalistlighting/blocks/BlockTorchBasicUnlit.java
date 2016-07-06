@@ -103,7 +103,7 @@ public class BlockTorchBasicUnlit extends BlockTorch implements ITileEntityProvi
 			}
 
 			// Get the player's held itemStack
-			 ItemStack itemStack = playerIn.getHeldItem(hand);
+			ItemStack itemStack = playerIn.getHeldItem(hand);
 
 			if(itemStack != null) {
 				// For each item in the config for lighter items, do logic

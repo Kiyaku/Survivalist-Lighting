@@ -22,6 +22,7 @@ public class ModConfig {
 	public static String[] configInWorldLightItems;
 	public static int configTorchDropMode;
 	public static boolean configLightInInventory;
+	public static float configSmolderPercent;
 
 	// Set of resource locations to store for crafting
 	public static Set<ResourceLocation> lightItems = new HashSet<ResourceLocation>();
@@ -49,6 +50,7 @@ public class ModConfig {
 		configInWorldLightItems = config.getStringList("in world lighter items", Configuration.CATEGORY_GENERAL, new String[] {"minecraft:torch", "survivalistlighting:torch_lit", "survivalistlighting:torch_coke_lit", "survivalistlighting:torch_stone_lit", "survivalistlighting:torch_stone_coke_lit", "tconstruct:stone_torch", "survivalistlighting:torch_bone_lit", "survivalistlighting:torch_bone_coke_lit", "bonetorch:boneTorch"}, "A list of blocks that can be used to light a torch by right clicking them.");
 		configTorchDropMode = config.getInt("torch drop mode", Configuration.CATEGORY_GENERAL, 0, 0, 2, "0: Torches drop as lit torches when broken\n1: Torches drop as unlit torches when broken\n2: Torches burn out completely when broken");
 		configLightInInventory = config.getBoolean("light torches in inventory", Configuration.CATEGORY_GENERAL, true, "Allow lighting torches in the crafting grid.");
+		configSmolderPercent = config.getFloat("smolder percent", Configuration.CATEGORY_GENERAL, 0.25F, Float.MIN_NORMAL, Float.MAX_VALUE, "The percent of fuel at which torches will dim. 0.25 is 25%.");		
 
 		// Add all the items to the resource location set
 		for (String string : configLightItems) {

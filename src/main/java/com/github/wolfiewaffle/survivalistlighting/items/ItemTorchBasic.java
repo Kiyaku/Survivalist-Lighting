@@ -13,6 +13,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class ItemTorchBasic extends ItemBlock {
@@ -48,29 +49,51 @@ public class ItemTorchBasic extends ItemBlock {
 		}
 	}
 
+	// Handles torch lighting
 	@Override
-	public EnumActionResult onItemUse(ItemStack itemStackIn, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		System.out.println("Called onItemUse()");
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 
-		ResourceLocation rl = worldIn.getBlockState(pos).getBlock().getRegistryName();
+		// Get the block the player is looking at
+		RayTraceResult rtr = this.rayTrace(worldIn, playerIn, true);
 
-			// If the activated block is a lighter block
+		if (rtr == null) {
+			return ActionResult.newResult(EnumActionResult.FAIL, itemStackIn);
+
+		} else if (rtr.typeOfHit == RayTraceResult.Type.BLOCK) {
+
+			// Get the registry name of the right clicked block
+			BlockPos hitPos = rtr.getBlockPos();
+			ResourceLocation rl = worldIn.getBlockState(hitPos).getBlock().getRegistryName();
+
+			// If the registry name matches on in the config
 			if (ModConfig.inWorldLightItems.contains(rl)) {
 
 				// If sneaking, just place the block normally
 				if (!playerIn.isSneaking()) {
 					lightTorch(playerIn, hand);
 
-					return EnumActionResult.SUCCESS;
+					return ActionResult.newResult(EnumActionResult.PASS, itemStackIn);
 				}
 			}
+		}
 
-		return super.onItemUse(itemStackIn, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+		return ActionResult.newResult(EnumActionResult.PASS, itemStackIn);
 	}
 
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
+	// Must override or onItemRightClick may not be called
+	public EnumActionResult onItemUse(ItemStack itemStackIn, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+
+		ResourceLocation rl = worldIn.getBlockState(pos).getBlock().getRegistryName();
+
+		if (ModConfig.inWorldLightItems.contains(rl)) {
+
+			// If sneaking, just place the block normally
+			if (!playerIn.isSneaking()) {
+				return EnumActionResult.PASS;
+			}
+		}
+
+		return super.onItemUse(itemStackIn, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 
 	/** Lights a torch in the inventory */

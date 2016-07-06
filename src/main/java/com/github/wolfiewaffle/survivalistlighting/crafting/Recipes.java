@@ -3,6 +3,7 @@ package com.github.wolfiewaffle.survivalistlighting.crafting;
 import com.github.wolfiewaffle.survivalistlighting.ModConfig;
 import com.github.wolfiewaffle.survivalistlighting.SurvivalistLighting;
 import com.github.wolfiewaffle.survivalistlighting.init.ModItems;
+import com.github.wolfiewaffle.survivalistlighting.items.ItemTorchBasic;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,17 +18,17 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Recipes {
 
-	private static Item[] toVanillaTorch = {
+	private static ItemTorchBasic[] toVanillaTorch = {
 		ModItems.torch_lit, 
 		ModItems.torch_unlit,
 		ModItems.torch_coke_lit, 
 		ModItems.torch_coke_unlit};
-	private static Item[] toStoneTorch = {
+	private static ItemTorchBasic[] toStoneTorch = {
 		ModItems.torch_stone_lit, 
 		ModItems.torch_stone_unlit,
 		ModItems.torch_stone_coke_lit, 
 		ModItems.torch_stone_coke_unlit};
-	private static Item[] toBoneTorch = {
+	private static ItemTorchBasic[] toBoneTorch = {
 		ModItems.torch_bone_lit, 
 		ModItems.torch_bone_unlit,
 		ModItems.torch_bone_coke_lit, 
