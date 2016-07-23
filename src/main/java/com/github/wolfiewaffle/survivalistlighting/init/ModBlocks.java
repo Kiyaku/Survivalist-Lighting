@@ -20,8 +20,8 @@ public final class ModBlocks {
 	private static boolean REG_COKE = ModConfig.configCokeTorches;
 	private static boolean REG_STONE = ModConfig.configStoneTorches && SurvivalistLighting.isTconInstalled;
 	private static boolean REG_STONE_COKE = REG_STONE && REG_COKE;
-	private static boolean REG_BONE = ModConfig.configStoneTorches && SurvivalistLighting.isTconInstalled;
-	private static boolean REG_BONE_COKE = REG_STONE && REG_COKE;
+	private static boolean REG_BONE = ModConfig.configStoneTorches && SurvivalistLighting.isBonetorchInstalled;
+	private static boolean REG_BONE_COKE = REG_BONE && REG_COKE;
 
 	// Torches
 	public static Block torch_burnt;
