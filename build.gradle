@@ -28,7 +28,7 @@ group= "com.github.wolfiewaffle" // http://maven.apache.org/guides/mini/guide-na
 archivesBaseName = "${mod_name}"
 
 minecraft {
-    version = "1.9.4-12.17.0.1954"
+    version = "1.10.2-12.18.1.2018"
     runDir = "run"
 
 	replace "@VERSION@", project.version
