@@ -14,7 +14,6 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -114,11 +113,7 @@ public class BlockTorchBasicUnlit extends BlockTorch implements ITileEntityProvi
 						if (itemStack.isItemStackDamageable()) {
 							itemStack.attemptDamageItem(1, RANDOM);
 						} else {
-							// If there is only one item, set the stack to air
-							if (itemStack.stackSize == 1)
-								playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(Blocks.AIR));
-							else
-								playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem, new ItemStack(itemStack.getItem(), itemStack.stackSize-1, itemStack.getMetadata()));
+							playerIn.inventory.decrStackSize(playerIn.inventory.currentItem, 1);
 						}
 
 						lightTorch(worldIn, pos, state.getValue(FACING));
